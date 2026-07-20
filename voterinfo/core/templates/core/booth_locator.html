@@ -1,0 +1,56 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1><i class="bi bi-geo-alt-fill"></i> Polling Booth Locator</h1>
+    <p>Enter your 6-digit PIN Code to find your assigned polling booth.</p>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="gov-card p-4 p-md-5">
+        <form method="post" novalidate id="boothForm">
+          {% csrf_token %}
+          <label class="form-label fw-semibold">{{ form.pin_code.label }}</label>
+          {{ form.pin_code }}
+          {% if form.pin_code.errors %}
+            <div class="text-danger small mt-2"><i class="bi bi-exclamation-circle"></i> {{ form.pin_code.errors.0 }}</div>
+          {% endif %}
+          <button type="submit" class="btn btn-gov-primary btn-lg w-100 mt-4" id="boothSubmitBtn">
+            <i class="bi bi-search"></i> Locate Booth
+          </button>
+        </form>
+
+        {% if error_message %}
+        <div class="alert alert-warning mt-4 mb-0"><i class="bi bi-exclamation-triangle-fill"></i> {{ error_message }}</div>
+        {% endif %}
+
+        {% if booth_data %}
+        <div class="result-card mt-4">
+          <h5><i class="bi bi-building-check"></i> Booth Details</h5>
+          <table class="table result-table mb-0">
+            <tr><th>Booth Name</th><td>{{ booth_data.booth_name }}</td></tr>
+            <tr><th>Booth Number</th><td>{{ booth_data.booth_number }}</td></tr>
+            <tr><th>Address</th><td>{{ booth_data.address }}</td></tr>
+            <tr><th>Officer Name</th><td>{{ booth_data.officer_name }}</td></tr>
+            <tr><th>Contact Number</th><td>{{ booth_data.contact_number|default:"N/A" }}</td></tr>
+            <tr><th>PIN Code</th><td>{{ booth_data.pin_code }}</td></tr>
+          </table>
+        </div>
+        {% endif %}
+      </div>
+
+      <p class="text-center text-muted small mt-3">
+        Try sample PIN Codes: <span class="badge bg-secondary">422003</span>
+        <span class="badge bg-secondary">400058</span>
+        <span class="badge bg-secondary">411005</span>
+        <span class="badge bg-secondary">110001</span>
+        <span class="badge bg-secondary">560034</span>
+        &nbsp;(run <code>python manage.py seed_data</code> first)
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

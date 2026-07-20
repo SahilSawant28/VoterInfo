@@ -1,0 +1,29 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1><i class="bi bi-file-earmark-text-fill"></i> Required Documents</h1>
+    <p>Documents you'll need to complete voter registration.</p>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row g-4">
+    {% for doc in documents %}
+    <div class="col-md-6 col-lg-4">
+      <div class="doc-card gov-card h-100">
+        <div class="doc-icon"><i class="bi bi-file-earmark-check-fill"></i></div>
+        <h5>{{ doc.name }}</h5>
+        <p class="text-muted small mb-0">{{ doc.purpose }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center mt-5">
+    <a href="{% url 'registration_guide' %}" class="btn btn-gov-primary btn-lg">
+      <i class="bi bi-arrow-left"></i> Back to Registration Guide
+    </a>
+  </div>
+</section>
+{% endblock %}

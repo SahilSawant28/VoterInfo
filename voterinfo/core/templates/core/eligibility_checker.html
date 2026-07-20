@@ -1,0 +1,52 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1><i class="bi bi-clipboard-check-fill"></i> Voter Eligibility Checker</h1>
+    <p>Enter your details to instantly check your voter registration eligibility.</p>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="gov-card p-4 p-md-5">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.name.label }}</label>
+            {{ form.name }}
+            {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.dob.label }}</label>
+            {{ form.dob }}
+            {% if form.dob.errors %}<div class="text-danger small mt-1">{{ form.dob.errors.0 }}</div>{% endif %}
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">{{ form.aadhaar.label }}</label>
+            {{ form.aadhaar }}
+            {% if form.aadhaar.errors %}<div class="text-danger small mt-1">{{ form.aadhaar.errors.0 }}</div>{% endif %}
+          </div>
+          <button type="submit" class="btn btn-gov-primary btn-lg w-100 mt-3">
+            <i class="bi bi-check2-circle"></i> Check Eligibility
+          </button>
+        </form>
+
+        {% if result %}
+        <div class="result-card mt-4 text-center {% if result.is_eligible %}eligible{% else %}not-eligible{% endif %}">
+          <i class="bi {% if result.is_eligible %}bi-check-circle-fill{% else %}bi-x-circle-fill{% endif %} result-icon"></i>
+          <h4 class="mt-2">{{ result.message }}</h4>
+          <div class="row mt-3 text-start">
+            <div class="col-6"><strong>Name:</strong> {{ result.name }}</div>
+            <div class="col-6"><strong>Age:</strong> {{ result.age }} years</div>
+            <div class="col-6"><strong>Age Requirement:</strong> {% if result.age_eligible %}✅ Met{% else %}❌ Not Met{% endif %}</div>
+            <div class="col-6"><strong>Aadhaar Valid:</strong> {% if result.documents_valid %}✅ Yes{% else %}❌ No{% endif %}</div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

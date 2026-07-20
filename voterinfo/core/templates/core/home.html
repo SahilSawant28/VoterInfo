@@ -1,0 +1,141 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Hero -->
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7" data-aos>
+        <span class="hero-badge"><i class="bi bi-patch-check-fill"></i> GovTech Digital Initiative</span>
+        <h1 class="hero-title">Empowering Every Vote.<br><span class="text-gradient">Simplifying Every Step.</span></h1>
+        <p class="hero-subtitle">
+          VoterInfo helps Indian citizens check voter registration eligibility, locate their nearest
+          polling booth, understand the registration process, and raise polling-day complaints — all in one place.
+        </p>
+        <div class="d-flex flex-wrap gap-3 mt-4">
+          <a href="{% url 'booth_locator' %}" class="btn btn-gov-primary btn-lg"><i class="bi bi-geo-alt-fill"></i> Find My Booth</a>
+          <a href="{% url 'eligibility_checker' %}" class="btn btn-gov-outline btn-lg"><i class="bi bi-clipboard-check"></i> Check Eligibility</a>
+        </div>
+        <div class="d-flex gap-4 mt-4 hero-stats">
+          <div><span class="stat-num">{{ booth_count }}</span><span class="stat-label">Booths Listed</span></div>
+          <div><span class="stat-num">{{ complaint_count }}</span><span class="stat-label">Complaints Logged</span></div>
+          <div><span class="stat-num">18+</span><span class="stat-label">Min. Voting Age</span></div>
+        </div>
+      </div>
+      <div class="col-lg-5 text-center">
+        <div class="hero-emblem-card">
+          <i class="bi bi-bank2 hero-emblem-icon"></i>
+          <p class="mb-0 mt-2 small text-muted">Government of India Emblem<br>(Official Logo Placeholder)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-flag-accent"></div>
+</section>
+
+<!-- Feature Cards -->
+<section class="container my-5 py-4">
+  <div class="text-center mb-5">
+    <h2 class="section-title">What You Can Do</h2>
+    <p class="section-subtitle">Everything you need for a smooth voting experience</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'booth_locator' %}" class="feature-card">
+        <div class="feature-icon bg-blue"><i class="bi bi-geo-alt-fill"></i></div>
+        <h5>Booth Locator</h5>
+        <p>Find your polling booth instantly using your PIN Code.</p>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'eligibility_checker' %}" class="feature-card">
+        <div class="feature-icon bg-saffron"><i class="bi bi-clipboard-check-fill"></i></div>
+        <h5>Eligibility Checker</h5>
+        <p>Verify your voter registration eligibility in seconds.</p>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'registration_guide' %}" class="feature-card">
+        <div class="feature-icon bg-blue"><i class="bi bi-journal-text"></i></div>
+        <h5>Registration Guide</h5>
+        <p>Step-by-step walkthrough of the voter registration process.</p>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'required_documents' %}" class="feature-card">
+        <div class="feature-icon bg-saffron"><i class="bi bi-file-earmark-text-fill"></i></div>
+        <h5>Required Documents</h5>
+        <p>See exactly which documents you need for registration.</p>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'complaint_form' %}" class="feature-card">
+        <div class="feature-icon bg-blue"><i class="bi bi-flag-fill"></i></div>
+        <h5>Booth Complaints</h5>
+        <p>Report polling booth issues quickly and track resolutions.</p>
+      </a>
+    </div>
+    <div class="col-md-6 col-lg-4">
+      <a href="{% url 'about' %}" class="feature-card">
+        <div class="feature-icon bg-saffron"><i class="bi bi-info-circle-fill"></i></div>
+        <h5>About the Project</h5>
+        <p>Learn about the technology stack and project mission.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Eligibility criteria strip -->
+<section class="criteria-section py-5">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <h2 class="section-title text-white">Basic Voter Eligibility</h2>
+        <p class="section-subtitle text-white-50">You may be eligible to register if you meet these criteria:</p>
+        <a href="{% url 'eligibility_checker' %}" class="btn btn-light btn-lg mt-2"><i class="bi bi-clipboard-check"></i> Check My Eligibility</a>
+      </div>
+      <div class="col-lg-7">
+        <ul class="criteria-list">
+          {% for item in criteria %}
+          <li><i class="bi bi-check-circle-fill"></i> {{ item }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Updates -->
+<section class="container my-5 py-4">
+  <div class="text-center mb-5">
+    <h2 class="section-title">Latest Updates</h2>
+    <p class="section-subtitle">Stay informed about the electoral process</p>
+  </div>
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="update-card">
+        <span class="update-date">Ongoing</span>
+        <h6>Special Summary Revision of Electoral Rolls</h6>
+        <p class="text-muted small">Citizens are encouraged to verify their name in the electoral roll and
+          update their details via the official NVSP portal.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="update-card">
+        <span class="update-date">Digital India</span>
+        <h6>Online Voter Registration (Form 6)</h6>
+        <p class="text-muted small">First-time voters can now complete Form 6 online without visiting the BLO office.</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="update-card">
+        <span class="update-date">Accessibility</span>
+        <h6>PwD-Friendly Polling Booths</h6>
+        <p class="text-muted small">Ramps and wheelchair assistance are being expanded across polling stations nationwide.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

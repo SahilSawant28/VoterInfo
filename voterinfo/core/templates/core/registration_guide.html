@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1><i class="bi bi-journal-text"></i> Voter Registration Guide</h1>
+    <p>A simple, step-by-step walkthrough of the voter registration process.</p>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9">
+      <div class="timeline">
+        {% for step in steps %}
+        <div class="timeline-item">
+          <div class="timeline-marker">{{ step.step }}</div>
+          <div class="timeline-content gov-card">
+            <h5>{{ step.title }}</h5>
+            <p class="text-muted mb-0">{{ step.description }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      <div class="alert alert-info mt-4">
+        <i class="bi bi-info-circle-fill"></i>
+        Official resources: Election Commission of India (ECI) portal and the National Voters'
+        Service Portal (NVSP) — <em>link placeholders, use official government URLs in production.</em>
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="{% url 'required_documents' %}" class="btn btn-gov-outline btn-lg">
+          <i class="bi bi-file-earmark-text"></i> View Required Documents
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

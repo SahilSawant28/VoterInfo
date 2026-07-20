@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1><i class="bi bi-flag-fill"></i> Polling Booth Complaint</h1>
+    <p>Faced an issue at your polling booth? Let us know and we'll track it.</p>
+  </div>
+</section>
+
+<section class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-7">
+      <div class="gov-card p-4 p-md-5">
+        <form method="post" novalidate>
+          {% csrf_token %}
+          <div class="row g-3">
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">{{ form.name.label }}</label>
+              {{ form.name }}
+              {% if form.name.errors %}<div class="text-danger small mt-1">{{ form.name.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">{{ form.mobile_number.label }}</label>
+              {{ form.mobile_number }}
+              {% if form.mobile_number.errors %}<div class="text-danger small mt-1">{{ form.mobile_number.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">{{ form.booth_number.label }}</label>
+              {{ form.booth_number }}
+              {% if form.booth_number.errors %}<div class="text-danger small mt-1">{{ form.booth_number.errors.0 }}</div>{% endif %}
+            </div>
+            <div class="col-md-6">
+              <label class="form-label fw-semibold">{{ form.complaint_category.label }}</label>
+              {{ form.complaint_category }}
+            </div>
+            <div class="col-12">
+              <label class="form-label fw-semibold">{{ form.complaint_description.label }}</label>
+              {{ form.complaint_description }}
+              {% if form.complaint_description.errors %}<div class="text-danger small mt-1">{{ form.complaint_description.errors.0 }}</div>{% endif %}
+            </div>
+          </div>
+          <button type="submit" class="btn btn-gov-primary btn-lg w-100 mt-4">
+            <i class="bi bi-send-fill"></i> Submit Complaint
+          </button>
+        </form>
+      </div>
+      <p class="text-center text-muted small mt-3">
+        Are you an administrator? <a href="{% url 'dashboard_complaints' %}">Manage complaints in the Admin Dashboard</a>.
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}

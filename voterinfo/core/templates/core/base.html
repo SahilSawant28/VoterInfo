@@ -1,0 +1,141 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ page_title }} | VoterInfo</title>
+<meta name="description" content="VoterInfo - Voter Registration Guide & Polling Booth Locator">
+
+<!-- Bootstrap 5 -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<!-- Google Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+{% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- Top Government Strip -->
+<div class="gov-strip">
+  <div class="container d-flex justify-content-between align-items-center">
+    <span><i class="bi bi-bank2"></i> Government of India | Election Commission Initiative (Demo Project)</span>
+    <span class="d-none d-md-inline"><i class="bi bi-translate"></i> English</span>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top main-navbar">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2" href="{% url 'home' %}">
+      <span class="brand-emblem"><i class="bi bi-shield-check"></i></span>
+      <span>
+        <span class="brand-title">VoterInfo</span>
+        <span class="brand-subtitle d-block">Registration Guide &amp; Booth Locator</span>
+      </span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1">
+        <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'booth_locator' %}">Booth Locator</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'eligibility_checker' %}">Eligibility</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'registration_guide' %}">Registration Guide</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'required_documents' %}">Documents</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'complaint_form' %}">Complaint</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+      </ul>
+
+      <!-- Search Bar -->
+      <form class="d-flex ms-lg-3 mt-3 mt-lg-0 position-relative" id="navSearchForm" role="search" onsubmit="return false;">
+        <input class="form-control search-input" type="search" id="navSearchInput"
+               placeholder="Search booth by PIN / area..." autocomplete="off">
+        <div id="searchResultsDropdown" class="search-results-dropdown d-none"></div>
+      </form>
+
+      <!-- Dark mode toggle -->
+      <button id="darkModeToggle" class="btn theme-toggle-btn ms-lg-3 mt-3 mt-lg-0" title="Toggle dark mode">
+        <i class="bi bi-moon-stars-fill"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Toasts -->
+<div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="toast align-items-center text-bg-{% if message.tags %}{{ message.tags }}{% else %}primary{% endif %} border-0 show" role="alert">
+        <div class="d-flex">
+          <div class="toast-body"><i class="bi bi-check-circle me-2"></i>{{ message }}</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<!-- Global Loading Spinner -->
+<div id="globalSpinner" class="global-spinner d-none">
+  <div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>
+</div>
+
+<main>
+{% block content %}{% endblock %}
+</main>
+
+<!-- Footer -->
+<footer class="site-footer mt-5">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5 class="footer-brand"><i class="bi bi-shield-check"></i> VoterInfo</h5>
+        <p class="text-muted small">A GovTech academic project helping citizens check voter eligibility,
+          locate polling booths, and understand the registration process. Built for educational purposes.</p>
+      </div>
+      <div class="col-md-2">
+        <h6>Quick Links</h6>
+        <ul class="list-unstyled footer-links">
+          <li><a href="{% url 'booth_locator' %}">Booth Locator</a></li>
+          <li><a href="{% url 'eligibility_checker' %}">Eligibility Checker</a></li>
+          <li><a href="{% url 'registration_guide' %}">Registration Guide</a></li>
+          <li><a href="{% url 'complaint_form' %}">File Complaint</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6>Official Resources (Placeholder)</h6>
+        <ul class="list-unstyled footer-links">
+          <li><i class="bi bi-link-45deg"></i> Election Commission of India (ECI)</li>
+          <li><i class="bi bi-link-45deg"></i> National Voters' Service Portal (NVSP)</li>
+          <li><i class="bi bi-link-45deg"></i> Digital India Initiative</li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <h6>Connect</h6>
+        <div class="d-flex gap-2 footer-social">
+          <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+          <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          <a href="#" aria-label="Email"><i class="bi bi-envelope"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <p class="text-center small text-muted mb-0">
+      &copy; {% now "Y" %} VoterInfo. Educational / Academic Demo Project — Not an official government website.
+    </p>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>const CSRF_TOKEN = "{{ csrf_token }}";</script>
+<script src="{% static 'core/js/script.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

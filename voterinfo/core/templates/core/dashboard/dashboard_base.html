@@ -1,0 +1,24 @@
+{% extends "core/base.html" %}
+{% block content %}
+<section class="container my-4">
+  <div class="row g-4">
+    <div class="col-lg-3">
+      <div class="gov-card p-3 dashboard-sidebar">
+        <h6 class="text-muted text-uppercase small mb-3">Admin Dashboard</h6>
+        <div class="list-group list-group-flush">
+          <a href="{% url 'dashboard_home' %}" class="list-group-item list-group-item-action"><i class="bi bi-speedometer2"></i> Overview</a>
+          <a href="{% url 'dashboard_booths' %}" class="list-group-item list-group-item-action"><i class="bi bi-geo-alt"></i> Polling Booths</a>
+          <a href="{% url 'dashboard_complaints' %}" class="list-group-item list-group-item-action"><i class="bi bi-flag"></i> Complaints</a>
+          <a href="{% url 'dashboard_users' %}" class="list-group-item list-group-item-action"><i class="bi bi-people"></i> Users</a>
+          <a href="{% url 'dashboard_stats' %}" class="list-group-item list-group-item-action"><i class="bi bi-bar-chart"></i> Statistics</a>
+          <a href="/admin/" class="list-group-item list-group-item-action"><i class="bi bi-gear"></i> Django Admin</a>
+          <a href="{% url 'dashboard_logout' %}" class="list-group-item list-group-item-action text-danger"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-9">
+      {% block dashboard_content %}{% endblock %}
+    </div>
+  </div>
+</section>
+{% endblock %}

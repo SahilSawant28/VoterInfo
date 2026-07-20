@@ -1,0 +1,33 @@
+{% extends "core/dashboard/dashboard_base.html" %}
+{% block dashboard_content %}
+<h3 class="mb-4"><i class="bi bi-bar-chart"></i> Statistics</h3>
+
+<div class="row g-4 mb-4">
+  <div class="col-md-6">
+    <div class="gov-card p-4">
+      <h6>Complaints by Status</h6>
+      {% for status, count in status_counts.items %}
+      <div class="d-flex justify-content-between small mb-1"><span>{{ status }}</span><strong>{{ count }}</strong></div>
+      <div class="progress mb-2" style="height:6px;"><div class="progress-bar" style="width: {% widthratio count total_complaints 100 %}%"></div></div>
+      {% empty %}<p class="text-muted small">No data yet.</p>{% endfor %}
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="gov-card p-4">
+      <h6>Complaints by Category</h6>
+      {% for cat, count in category_counts.items %}
+      <div class="d-flex justify-content-between small mb-1"><span>{{ cat }}</span><strong>{{ count }}</strong></div>
+      <div class="progress mb-2" style="height:6px;"><div class="progress-bar bg-warning" style="width: {% widthratio count total_complaints 100 %}%"></div></div>
+      {% empty %}<p class="text-muted small">No data yet.</p>{% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="gov-card p-4">
+  <h6>Booths by Area</h6>
+  {% for area, count in area_counts.items %}
+  <div class="d-flex justify-content-between small mb-1"><span>{{ area }}</span><strong>{{ count }}</strong></div>
+  <div class="progress mb-2" style="height:6px;"><div class="progress-bar bg-info" style="width: {% widthratio count total_booths 100 %}%"></div></div>
+  {% empty %}<p class="text-muted small">No data yet.</p>{% endfor %}
+</div>
+{% endblock %}

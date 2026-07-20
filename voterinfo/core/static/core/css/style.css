@@ -1,0 +1,500 @@
+/* ==========================================================================
+   VoterInfo — Design Tokens
+   Palette:
+     --gov-blue        #0B3D91  (Ashoka Chakra blue — primary)
+     --gov-blue-dark    #072a66
+     --gov-saffron      #FF9933  (tricolor saffron — accent)
+     --gov-green        #128807  (tricolor green — used sparingly, success)
+     --gov-grey         #F4F6F9  (light grey background)
+     --gov-navy-text    #14213D  (body text)
+   Type:
+     Display / headings: 'Poppins' (geometric, confident, works for gov UI)
+     Body / UI:           'Noto Sans' (also covers Devanagari — reinforces
+                           the Indian-government context; neutral & legible)
+   Signature element:
+     A thin tricolor (saffron/white/green) rule used ONCE per page as an
+     accent under the hero and as a top border on the navbar — evokes the
+     Indian flag without becoming kitsch, and a rotating Ashoka-chakra-style
+     ring on the hero emblem card.
+   ========================================================================== */
+
+:root{
+  --gov-blue: #0B3D91;
+  --gov-blue-dark: #072a66;
+  --gov-blue-light: #E8EFFC;
+  --gov-saffron: #FF9933;
+  --gov-saffron-dark: #E67E22;
+  --gov-green: #128807;
+  --gov-grey: #F4F6F9;
+  --gov-navy-text: #14213D;
+  --gov-border: #E1E6EE;
+  --gov-white: #ffffff;
+
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Noto Sans', sans-serif;
+
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-soft: 0 8px 24px rgba(11, 61, 145, 0.08);
+  --shadow-card: 0 4px 14px rgba(20, 33, 61, 0.06);
+}
+
+[data-bs-theme="dark"]{
+  --gov-grey: #0F172A;
+  --gov-navy-text: #E7ECF7;
+  --gov-white: #172035;
+  --gov-border: #29344c;
+  --gov-blue-light: #1b2b52;
+}
+
+* { box-sizing: border-box; }
+
+body{
+  font-family: var(--font-body);
+  background: var(--gov-grey);
+  color: var(--gov-navy-text);
+  transition: background .25s ease, color .25s ease;
+}
+
+h1,h2,h3,h4,h5,h6{
+  font-family: var(--font-display);
+  font-weight: 700;
+  color: var(--gov-navy-text);
+}
+
+a{ text-decoration: none; }
+
+/* ---------------------------------------------------------------- */
+/* TOP GOVERNMENT STRIP + TRICOLOR SIGNATURE RULE                    */
+/* ---------------------------------------------------------------- */
+.gov-strip{
+  background: var(--gov-blue-dark);
+  color: #cddcfb;
+  font-size: .78rem;
+  padding: 6px 0;
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, var(--gov-saffron) 0 33%, #ffffff 33% 66%, var(--gov-green) 66% 100%) 1;
+}
+
+/* ---------------------------------------------------------------- */
+/* NAVBAR                                                             */
+/* ---------------------------------------------------------------- */
+.main-navbar{
+  background: var(--gov-white);
+  box-shadow: var(--shadow-card);
+  padding: .65rem 0;
+}
+.brand-emblem{
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: var(--gov-blue);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+}
+.brand-title{
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--gov-blue);
+  line-height: 1.1;
+}
+.brand-subtitle{
+  font-size: .68rem;
+  color: #7c8aa5;
+  font-weight: 500;
+}
+.main-navbar .nav-link{
+  color: var(--gov-navy-text);
+  font-weight: 600;
+  font-size: .92rem;
+  padding: .5rem .8rem !important;
+  border-radius: 8px;
+  transition: all .2s ease;
+}
+.main-navbar .nav-link:hover{
+  background: var(--gov-blue-light);
+  color: var(--gov-blue);
+}
+
+.search-input{
+  border-radius: 999px;
+  border: 1px solid var(--gov-border);
+  padding: .5rem 1rem;
+  min-width: 220px;
+  background: var(--gov-grey);
+}
+.search-results-dropdown{
+  position: absolute;
+  top: 110%; left: 0; right: 0;
+  background: var(--gov-white);
+  border: 1px solid var(--gov-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  z-index: 1000;
+  max-height: 320px;
+  overflow-y: auto;
+}
+.search-results-dropdown .search-item{
+  padding: .6rem 1rem;
+  border-bottom: 1px solid var(--gov-border);
+  cursor: pointer;
+  font-size: .85rem;
+}
+.search-results-dropdown .search-item:hover{ background: var(--gov-blue-light); }
+.search-results-dropdown .search-item:last-child{ border-bottom: none; }
+
+.theme-toggle-btn{
+  border: 1px solid var(--gov-border);
+  background: var(--gov-white);
+  border-radius: 50%;
+  width: 42px; height: 42px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gov-blue);
+}
+.theme-toggle-btn:hover{ background: var(--gov-blue-light); }
+
+.global-spinner{
+  position: fixed; inset: 0;
+  background: rgba(20,33,61,.35);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2000;
+}
+
+/* ---------------------------------------------------------------- */
+/* BUTTONS                                                            */
+/* ---------------------------------------------------------------- */
+.btn-gov-primary{
+  background: var(--gov-blue);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  padding: .7rem 1.6rem;
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+.btn-gov-primary:hover{
+  background: var(--gov-blue-dark);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+.btn-gov-outline{
+  border: 2px solid var(--gov-blue);
+  color: var(--gov-blue);
+  border-radius: 10px;
+  font-weight: 600;
+  padding: .65rem 1.6rem;
+  background: transparent;
+  transition: all .15s ease;
+}
+.btn-gov-outline:hover{
+  background: var(--gov-blue);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------- */
+/* HERO                                                                */
+/* ---------------------------------------------------------------- */
+.hero-section{
+  position: relative;
+  background: linear-gradient(135deg, var(--gov-blue-light) 0%, var(--gov-grey) 60%);
+  padding: 5rem 0 4rem;
+  overflow: hidden;
+}
+.hero-badge{
+  display: inline-flex; align-items: center; gap: .4rem;
+  background: rgba(255,153,51,.15);
+  color: var(--gov-saffron-dark);
+  font-weight: 600; font-size: .78rem;
+  padding: .4rem .9rem;
+  border-radius: 999px;
+  margin-bottom: 1rem;
+}
+.hero-title{
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+}
+.text-gradient{
+  background: linear-gradient(90deg, var(--gov-blue), var(--gov-saffron-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-subtitle{
+  font-size: 1.05rem;
+  color: #556;
+  max-width: 560px;
+}
+.hero-stats{ margin-top: 2rem; }
+.hero-stats .stat-num{
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--gov-blue);
+}
+.hero-stats .stat-label{
+  font-size: .75rem;
+  color: #7c8aa5;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+.hero-emblem-card{
+  background: var(--gov-white);
+  border-radius: var(--radius-lg);
+  padding: 3rem 2rem;
+  box-shadow: var(--shadow-soft);
+  display: inline-block;
+  position: relative;
+}
+.hero-emblem-icon{
+  font-size: 4.5rem;
+  color: var(--gov-blue);
+  animation: chakra-spin 18s linear infinite;
+  display: inline-block;
+}
+@keyframes chakra-spin{ from{ transform: rotate(0);} to{ transform: rotate(360deg);} }
+.hero-flag-accent{
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(90deg, var(--gov-saffron) 0 33%, #ffffff 33% 66%, var(--gov-green) 66% 100%);
+}
+
+@media (prefers-reduced-motion: reduce){
+  .hero-emblem-icon{ animation: none; }
+}
+
+/* ---------------------------------------------------------------- */
+/* SECTIONS / TYPOGRAPHY HELPERS                                     */
+/* ---------------------------------------------------------------- */
+.section-title{ font-size: 2rem; font-weight: 800; }
+.section-subtitle{ color: #7c8aa5; }
+
+.page-hero{
+  background: linear-gradient(120deg, var(--gov-blue) 0%, var(--gov-blue-dark) 100%);
+  color: #fff;
+  padding: 3.5rem 0 3rem;
+  margin-bottom: 1rem;
+}
+.page-hero h1{ color: #fff; font-weight: 800; }
+.page-hero p{ color: #cddcfb; margin-bottom: 0; }
+
+/* ---------------------------------------------------------------- */
+/* FEATURE CARDS                                                      */
+/* ---------------------------------------------------------------- */
+.feature-card{
+  display: block;
+  background: var(--gov-white);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.6rem;
+  height: 100%;
+  box-shadow: var(--shadow-card);
+  color: var(--gov-navy-text);
+  border: 1px solid transparent;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.feature-card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-soft);
+  border-color: var(--gov-blue-light);
+  color: var(--gov-navy-text);
+}
+.feature-icon{
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+.feature-icon.bg-blue{ background: var(--gov-blue); }
+.feature-icon.bg-saffron{ background: var(--gov-saffron-dark); }
+.feature-card h5{ font-weight: 700; margin-bottom: .4rem; }
+.feature-card p{ color: #7c8aa5; font-size: .9rem; margin-bottom: 0; }
+
+/* ---------------------------------------------------------------- */
+/* CRITERIA SECTION                                                    */
+/* ---------------------------------------------------------------- */
+.criteria-section{
+  background: var(--gov-blue);
+  background-image: linear-gradient(135deg, var(--gov-blue) 0%, var(--gov-blue-dark) 100%);
+}
+.criteria-list{ list-style: none; padding: 0; margin: 0; }
+.criteria-list li{
+  color: #fff;
+  background: rgba(255,255,255,.08);
+  padding: .9rem 1.2rem;
+  border-radius: 10px;
+  margin-bottom: .7rem;
+  font-weight: 500;
+}
+.criteria-list li i{ color: var(--gov-saffron); margin-right: .6rem; }
+
+/* ---------------------------------------------------------------- */
+/* UPDATE CARDS                                                        */
+/* ---------------------------------------------------------------- */
+.update-card{
+  background: var(--gov-white);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  height: 100%;
+  border-left: 4px solid var(--gov-saffron);
+  box-shadow: var(--shadow-card);
+}
+.update-date{
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--gov-blue);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ---------------------------------------------------------------- */
+/* GENERIC GOV CARD / FORMS                                            */
+/* ---------------------------------------------------------------- */
+.gov-card{
+  background: var(--gov-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--gov-border);
+}
+input.form-control, select.form-select, textarea.form-control,
+input[type="text"], input[type="password"]{
+  border-radius: 10px;
+  border: 1px solid var(--gov-border);
+  padding: .65rem 1rem;
+  background: var(--gov-grey);
+  color: var(--gov-navy-text);
+}
+input.form-control:focus, select.form-select:focus, textarea.form-control:focus{
+  border-color: var(--gov-blue);
+  box-shadow: 0 0 0 .2rem rgba(11,61,145,.15);
+  background: var(--gov-white);
+}
+
+/* ---------------------------------------------------------------- */
+/* RESULT CARDS                                                        */
+/* ---------------------------------------------------------------- */
+.result-card{
+  background: var(--gov-blue-light);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+}
+.result-card.eligible{ background: #e5f7e6; }
+.result-card.not-eligible{ background: #fdecec; }
+.result-icon{ font-size: 2.6rem; }
+.result-card.eligible .result-icon{ color: var(--gov-green); }
+.result-card.not-eligible .result-icon{ color: #d9534f; }
+.result-table th{ color: #7c8aa5; font-weight: 600; width: 40%; border-color: var(--gov-border); }
+.result-table td{ border-color: var(--gov-border); font-weight: 500; }
+
+/* ---------------------------------------------------------------- */
+/* TIMELINE (Registration Guide)                                       */
+/* ---------------------------------------------------------------- */
+.timeline{ position: relative; padding-left: 2.5rem; }
+.timeline::before{
+  content: '';
+  position: absolute; left: 18px; top: 6px; bottom: 6px;
+  width: 2px; background: var(--gov-border);
+}
+.timeline-item{ position: relative; margin-bottom: 1.5rem; }
+.timeline-marker{
+  position: absolute; left: -2.5rem; top: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--gov-blue);
+  color: #fff; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+}
+.timeline-content{ padding: 1.2rem 1.5rem; }
+.timeline-content h5{ margin-bottom: .3rem; }
+
+/* ---------------------------------------------------------------- */
+/* DOCUMENT CARDS                                                       */
+/* ---------------------------------------------------------------- */
+.doc-card{ padding: 1.8rem; text-align: center; }
+.doc-icon{ font-size: 2.2rem; color: var(--gov-saffron-dark); margin-bottom: .8rem; }
+
+/* ---------------------------------------------------------------- */
+/* ABOUT PAGE                                                            */
+/* ---------------------------------------------------------------- */
+.tech-badge{
+  background: var(--gov-blue-light);
+  color: var(--gov-blue);
+  font-weight: 600;
+  font-size: .8rem;
+  padding: .45rem 1rem;
+  border-radius: 999px;
+}
+
+/* ---------------------------------------------------------------- */
+/* ERROR PAGES                                                            */
+/* ---------------------------------------------------------------- */
+.error-page{ padding: 5rem 0; }
+
+/* ---------------------------------------------------------------- */
+/* FOOTER                                                                */
+/* ---------------------------------------------------------------- */
+.site-footer{
+  background: var(--gov-navy-text);
+  color: #b9c3d9;
+  padding: 3rem 0 1.5rem;
+}
+.site-footer h5, .site-footer h6{ color: #fff; }
+.footer-brand{ font-family: var(--font-display); font-weight: 800; }
+.footer-links li{ margin-bottom: .5rem; font-size: .88rem; }
+.footer-links a{ color: #b9c3d9; }
+.footer-links a:hover{ color: var(--gov-saffron); }
+.footer-social a{
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+}
+.footer-social a:hover{ background: var(--gov-saffron); }
+.site-footer hr{ border-color: rgba(255,255,255,.1); }
+
+/* ---------------------------------------------------------------- */
+/* DASHBOARD                                                              */
+/* ---------------------------------------------------------------- */
+.dashboard-sidebar .list-group-item{
+  border: none;
+  background: transparent;
+  font-weight: 600;
+  color: var(--gov-navy-text);
+  border-radius: 8px;
+  margin-bottom: .2rem;
+}
+.dashboard-sidebar .list-group-item:hover{ background: var(--gov-blue-light); color: var(--gov-blue); }
+
+.stat-card{
+  background: var(--gov-white);
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  text-align: center;
+  box-shadow: var(--shadow-card);
+}
+.stat-card i{ font-size: 1.6rem; color: var(--gov-blue); }
+.stat-card h3{ font-size: 1.9rem; margin: .4rem 0 0; }
+.stat-card p{ color: #7c8aa5; font-size: .8rem; margin: 0; text-transform: uppercase; letter-spacing: .04em; }
+
+.status-badge{ font-weight: 600; padding: .4rem .7rem; }
+.status-pending{ background: #fff3cd; color: #856404; }
+.status-in.progress, .status-in-progress{ background: #cfe2ff; color: #084298; }
+.status-resolved{ background: #d1e7dd; color: #0f5132; }
+.status-rejected{ background: #f8d7da; color: #842029; }
+.status-select{ max-width: 130px; }
+
+/* ---------------------------------------------------------------- */
+/* RESPONSIVE                                                            */
+/* ---------------------------------------------------------------- */
+@media (max-width: 991px){
+  .hero-title{ font-size: 2.1rem; }
+  .search-results-dropdown{ position: static; margin-top: .5rem; }
+}
